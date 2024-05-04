@@ -2,7 +2,7 @@
   "name": "api-devcodeburguer",
   "version": "1.0.0",
   "description": "DevBurguer-API",
-  "type": "module",
+  
   "main": "src/server.js",
   "scripts": {
     "dev": "nodemon"   
