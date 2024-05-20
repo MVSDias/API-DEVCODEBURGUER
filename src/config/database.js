@@ -3,7 +3,7 @@
 /** configuração do banco de dados */
 
 module.exports = {
-  dialect: 'postgres', // qual a linguagem
+  dialect: 'postgres', // qual a linguagem/banco
   host: 'localhost', // qual a port - por padrao é 5432
   port: 5432,
   username: 'postgres', // nome de usuario

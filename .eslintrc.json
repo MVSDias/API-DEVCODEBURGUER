@@ -23,7 +23,6 @@
             "node": {
                 "extensions": [".js", ".jsx", ".json", ".ts", ".tsx"],
                 "moduleDirectory": ["node_modules", "src/"],
-                "eslint linebreak-style": ["error", "windows"],
                 "linebreak-style": "off"
             }
         }

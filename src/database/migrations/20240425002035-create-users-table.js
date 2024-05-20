@@ -1,5 +1,4 @@
-/** @type {import('sequelize-cli').Migration} */
-
+/** @type {import('sequelize-cli').Migration}  */
 /* Criando a tabela do banco */
 
 module.exports = {
