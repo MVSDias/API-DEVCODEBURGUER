@@ -38,7 +38,7 @@ module.exports = {
         allowNull: false,
       },
 
-      updated_at: {
+      updated_at: { // informações de auditoria - guardam as datas de modificação
         type: Sequelize.DATE,
         allowNull: false,
       },
@@ -47,7 +47,7 @@ module.exports = {
   },
 
   async down(queryInterface) { // desfaz o que foi criado/ feito no metodo up
-    await queryInterface.dropTable('users');
+    await queryInterface.dropTable('users'); // exclui a tabela (droptable) de  users
   },
 
 };
