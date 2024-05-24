@@ -8,7 +8,7 @@ import ConfigDatabase from '../config/database'; /* passando a configuração do
 
 import User from '../app/models/User';
 
-const models = [User];
+const models = [User]; // criando o array consigo usar o método map para 
 class Database {
   constructor() {
     this.init();
@@ -21,7 +21,7 @@ class Database {
     models.map((model) => model.init(this.connection));
     /* para cada model vou chamar o metodo init da class pai Models, dentro de
     models/User.js, passando o sequelize que é a conexão com o banco
-    this.connection - conexão com o banco - todas as models vão usar a mesma conexão com o banco
+    (this.connection) - conexão com o banco - todas as models vão usar a mesma conexão com o banco
     evitando abrir uma nova toda vez, evitando gargalos no acesso ao banco. */
   }
 }

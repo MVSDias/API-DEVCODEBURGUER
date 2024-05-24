@@ -1,7 +1,7 @@
 /* eslint-disable linebreak-style */
 /** recebe as informações, faz a s ligações, regras de negócios. */
 
-/* O UserController é uma classe e vai chamar o Model */
+/* O UserController é uma classe (por isso usa padrão PascalCase na nomenclatura) e vai chamar o Model */
 
 /** metodos dentro da classe UseController
 
@@ -16,46 +16,43 @@
 
 import { v4 } from 'uuid';
 import * as Yup from 'yup';
-/** "*" significa que estou importando
- * tudo de dentro do yup como Yup.
+/*
+    "*" significa que estou importando tudo de dentro do yup como Yup.
  */
 import User from '../models/User';
 
 class UserController {
   async store(request, response) {
-    const schema = Yup.object({
-      /** schema - validação dos dados */
+    const schema = Yup.object({  /** schema - validação dos dados */
       // eslint-disable-next-line max-len
-      name: Yup.string().required(), /** significa: que tem q ser string e é obrigatório(required) */
-      email: Yup.string().email().required(),
-      /** fortmato email */
-      password: Yup.string().min(6).required(),
-      /** minnimo 6 caracteres */
+      name: Yup.string().required() /** significa: que tem q ser string e é obrigatório(required) */,
+      email: Yup.string().email().required(),  /** fortmato email */
+      password: Yup.string().min(6).required(), /** minnimo 6 caracteres */
       // eslint-disable-next-line max-len
-      admin: Yup.boolean(),
+      admin: Yup.boolean(), /* não precisa require pq se estiver em branco o banco de dados já preeenche automatico com false */
     }); // eslint-disable-next-line max-len
-    /** não é obrigatorio colocar se é admin, pq se está em braco o banco de dados já preeenche automático */
     
-    try {
-      schema.validateSync(request.body, { abortEarly: false });
-    } catch (err) {
-      return response.status(400).json({ error: err.errors });
-    // eslint-disable-next-line max-len
-    } /** Validação para saber se os dados atende os requisitos do banco. O 'abortEarly' como false, faz com que a validação vá até o fim, sem parrar logo no primeiro erro que encontra. */
 
-    const {
-      name, email, password, admin,
-    } = request.body;
-    
+    try {
+      schema.validateSync(request.body, { abortEarly: false }); /* validação de forma syncrona em vez de await  Validação para saber se os dados atende os requisitos do banco. O 'abortEarly' como false, faz com que a validação vá até o fim, sem parrar logo no primeiro erro que encontra. */
+    } catch (err) {
+      return response.status(400).json({ error: err.errors });// busca no response em erros: os tipos de erros que aconteceram
+      // eslint-disable-next-line max-len
+    } 
+
+    const { name, email, password, admin } = request.body;
+
     /** verificando se o email já é cadastrado */
-    const userExist = await User.findOne({
-      
+
+    const userExists = await User.findOne({ /* estou indo ao banco de user procurar, pelo menos um usuário, q tenha o mesmo email q eu passei */
       where: {
         email,
       },
     });
 
-    if (userExist) {
+    console.log(userExists)
+
+    if (userExists) {
       /** email já cadastrado retorna erro */
       return response.status(400).json({ error: 'User already exists' });
     }
@@ -67,7 +64,7 @@ class UserController {
       password,
       admin,
     });
-    
+
     return response.status(201).json({
       id: user.id,
       name,
