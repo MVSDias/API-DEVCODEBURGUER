@@ -10,7 +10,7 @@ import bcrypt from 'bcrypt';
 /* // extends significa q a class User é filha
 da class Model e herda seus metodos */
 
-class User extends Model {
+class User extends Model { // criando modelo de usuário - tudo que terá na tabela usuário
   /* static permite disponibilizar os metodos
     sem instanciar a class */
 

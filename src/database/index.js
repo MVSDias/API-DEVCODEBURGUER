@@ -7,8 +7,9 @@ import Sequelize from 'sequelize';
 import ConfigDatabase from '../config/database'; /* passando a configuração do banco */
 
 import User from '../app/models/User';
+import Product from '../app/models/Product'
 
-const models = [User]; // criando o array consigo usar o método map para 
+const models = [User, Product]; // Registro os modelos criados(Product e User). 
 class Database {
   constructor() {
     this.init();
